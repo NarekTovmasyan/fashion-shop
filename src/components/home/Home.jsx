@@ -1,10 +1,10 @@
 import Cards from "../card/Cards";
-
+import "../home/home.css";
 
 
 const Home = () => {
     return (
-        <div>
+        <div className="home">
            <Cards />
         </div>
     );

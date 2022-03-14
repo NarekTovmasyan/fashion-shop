@@ -1,0 +1,7 @@
+.total{
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    flex-direction:row;
+    flex-wrap: nowrap;
+}

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getData } from "../../services/api";
 import CardItem from "./CardItem";
-import "./cards.css";
 
 const Cards = () => {
   const [result, setResult] = useState([]);
@@ -13,7 +12,7 @@ const Cards = () => {
   }, []);
 
   return (
-    <div class="ui stackable three column grid">
+    <div  className="total">
       {result.map((item) => {
         return (
           <CardItem
