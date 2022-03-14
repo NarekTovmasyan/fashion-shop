@@ -1,4 +1,4 @@
-import Cards from "../card/Cards";
+import Cards from "../card/CardItem";
 
 
 

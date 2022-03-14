@@ -1,11 +1,10 @@
-import Cards from "../card/Cards";
-
+import Card from "../card/Card";
 
 
 const Home = () => {
     return (
         <div>
-           <Cards />
+           <Card /> 
         </div>
     );
 }

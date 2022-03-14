@@ -38,7 +38,7 @@ const NavBarMobile = (props) => {
       <Sidebar.Pusher
         dimmed={visible}
         onClick={onPusherClick}
-        style={{ minHeight: "15vh" }}
+        // style={{ minHeight: "100vh" }}
       >
         <Menu fixed="top" inverted>
           <Menu.Item>
