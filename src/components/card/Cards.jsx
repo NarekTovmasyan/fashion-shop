@@ -13,7 +13,7 @@ const Cards = () => {
   }, []);
 
   return (
-    <div class="ui stackable three column grid">
+    <div className="ui stackable three column grid">
       {result.map((item) => {
         return (
           <CardItem

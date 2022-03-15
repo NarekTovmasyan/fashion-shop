@@ -1,20 +1,27 @@
-
 import "./App.css";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
-// import {getData} from "./services/api"
+import Products from "./components/products/Products";
+import Slides from "./components/slider/Slides";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 
-// getData();
-function App() {
- 
+function App(slides) {
   return (
-    <div className="App">
-     <Header />
-     <Home />
-     <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <Slides slides={slides} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={ <Products/> } />
+        {/* <Route path="contact" element={ <Contact/> } /> */}
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+

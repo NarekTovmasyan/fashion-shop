@@ -1,28 +1,22 @@
-
 import React from "react";
 import { createMedia } from "@artsy/fresnel";
 import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
- const AppMedia = createMedia({
-    breakpoints: {
+const AppMedia = createMedia({
+  breakpoints: {
     mobile: 320,
     tablet: 768,
     computer: 992,
     largeScreen: 1200,
-    widescreen: 1920
-  }
+    widescreen: 1920,
+  },
 });
 const { Media, MediaContextProvider } = AppMedia;
 
 const NavBarMobile = (props) => {
-  const {
-    children,
-    leftItems,
-    onPusherClick,
-    onToggle,
-    rightItems,
-    visible
-  } = props;
+  const { children, leftItems, onPusherClick, onToggle, rightItems, visible } =
+    props;
 
   return (
     <Sidebar.Pushable>
@@ -81,10 +75,9 @@ const NavBarDesktop = (props) => {
   );
 };
 
-
 class NavBar extends React.Component {
   state = {
-    visible: false
+    visible: false,
   };
 
   handlePusher = () => {
@@ -100,7 +93,7 @@ class NavBar extends React.Component {
     const { visible } = this.state;
 
     return (
-      <div>
+      <>
         <Media at="mobile">
           <NavBarMobile
             leftItems={leftItems}
@@ -108,36 +101,34 @@ class NavBar extends React.Component {
             onToggle={this.handleToggle}
             rightItems={rightItems}
             visible={visible}
-          >
-
-          </NavBarMobile>
+          ></NavBarMobile>
         </Media>
 
         <Media greaterThan="mobile">
           <NavBarDesktop leftItems={leftItems} rightItems={rightItems} />
         </Media>
-      </div>
+      </>
     );
   }
 }
 
 const leftItems = [
-  { as: "a", content: "Home", key: "home" },
-  { as: "a", content: "Products", key: "products" },
-  { as: "a", content: "Review", key: "review" }
+  { as: Link, to: "/", content: "Home", key: "home" },
+  { as: Link, to: "/products", content: "Products", key: "products" },
+  { as: Link, to: "/review", content: "Review", key: "review" },
 ];
 const rightItems = [
   { as: "a", content: "Login", key: "login" },
-  { as: "a", content: "Register", key: "register" }
+  { as: "a", content: "Register", key: "register" },
 ];
 function Header() {
-    return (
-<MediaContextProvider>
+  return (
+    <MediaContextProvider>
       <NavBar leftItems={leftItems} rightItems={rightItems}>
         <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
       </NavBar>
     </MediaContextProvider>
-    )
+  );
 }
-    
+
 export default Header;
