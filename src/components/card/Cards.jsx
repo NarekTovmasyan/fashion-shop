@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getData } from "../../services/api";
+import { getData, getProducts } from "../../Services/api";
 import CardItem from "./CardItem";
-import "./cards.css";
+import "./card.css"
 
 const Cards = () => {
   const [result, setResult] = useState([]);
@@ -13,7 +13,7 @@ const Cards = () => {
   }, []);
 
   return (
-    <div className="ui stackable three column grid">
+    <div class="ui stackable three column grid">
       {result.map((item) => {
         return (
           <CardItem

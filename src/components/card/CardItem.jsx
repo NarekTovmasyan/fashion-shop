@@ -1,5 +1,6 @@
+
 import { Card, Icon, Image } from 'semantic-ui-react'
-import "./cardItem.css";
+
 
 function CardItem({description, image, name, price}){
     return (

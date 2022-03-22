@@ -1,13 +1,22 @@
-import React from 'react';
-import { Header, Label } from 'semantic-ui-react';
+import { Label } from "semantic-ui-react";
 
+function Products(){
 
-const Products = () => {
-    return (
+    return(
         <Label>
             hello
+            helloddfd
+            dsfsdf
+            df
+            dsfsdf
+            dfdg
+            dggg
+            fff
+            f
+            f
+            dtr
+            
         </Label>
-    );
+    )
 }
-
 export default Products;

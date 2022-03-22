@@ -1,15 +1,14 @@
 import Cards from "../card/Cards";
-import "../home/home.css";
-import Slides from "../slider/Slides";
+import Slide from "../Slide/Slide"
+import slidesData from "../../Services/slideData";
+import "../home/home.css"
 
-
-const Home = () => {
+function Home(){
     return (
-        <div className="home">
-            <Slides />
-           <Cards />
-        </div>
-    );
+       <div className="home ui container">
+            <Slide slides={slidesData()}/>
+            <Cards />
+       </div>
+    )
 }
-
 export default Home;
