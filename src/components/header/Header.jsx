@@ -17,11 +17,6 @@ import { useAuth0 } from "@auth0/auth0-react";
     });
 
     const { Media, MediaContextProvider } = AppMedia;
-    console.log("Media",Media);
-    console.log("MediaContextProvider",MediaContextProvider);
-    console.log("AppMedia",AppMedia);
-
-    
 
     const NavBarMobile = (props) => {
         const {
@@ -51,7 +46,7 @@ import { useAuth0 } from "@auth0/auth0-react";
                     style={{ minHeight: "100vh" }}
                 >
                     <Menu fixed="top" inverted>
-                        <Menu.Item>
+                        <Menu.Item key="image">
                             <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
                         </Menu.Item>
                         <Menu.Item onClick={onToggle}>
@@ -86,8 +81,8 @@ import { useAuth0 } from "@auth0/auth0-react";
                     <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
                 </Menu.Item>
 
-                {leftItems.map((item) => (
-                    <Menu.Item {...item} />
+                {leftItems.map((item, index) => (
+                    <Menu.Item {...item} key={index} />
                 ))}
              <Menu.Menu position="right" key="rightItems">
                 {rightItems.map((item, index) => {
@@ -137,8 +132,8 @@ function NavBar({leftItems, rightItems }){
 
     const leftItems = [
         { as: Link, to:"/", content: "Home", key: "home" },
-        { as: Link, to:"/Products", content: "Products", key: "users" },
-        { as: Link, to:"/Reviews", content: "Reviews", key: "users" }
+        { as: Link, to:"/Products", content: "Products", key: "Products" },
+        { as: Link, to:"/Reviews", content: "Reviews", key: "Reviews" }
     ];
 
 
@@ -157,7 +152,7 @@ function Header(){
 
         rightItems.push({
             children: [
-              <Image avatar spaced="right" src={user.picture} />,
+              <Image avatar spaced="right" src={user.picture} key="image"/>,
               <Dropdown pointing="top left" text="Username" key="userDropdown">
                 <Dropdown.Menu key="userDropdownMenu">
                   <Dropdown.Item text={user.name} key={user.name} />

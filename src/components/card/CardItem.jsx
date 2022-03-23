@@ -3,7 +3,8 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 
 function CardItem({description, image, name, price}){
-    return (
+  console.log(description, image, name, price);  
+  return (
         <Card centered>
           <Image src={image} wrapped ui={false} />
           <Card.Content>
@@ -12,7 +13,7 @@ function CardItem({description, image, name, price}){
               <span className='date'>Joined in 2015</span>
             </Card.Meta>
             <Card.Description>
-              {description}
+              {description.comment}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
