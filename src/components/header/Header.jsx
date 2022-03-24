@@ -148,8 +148,6 @@ function Header(){
     const {user, isAuthenticated, logout} = useAuth0()
     rightItems.length = 0;
     if(isAuthenticated){
-        console.log(user);
-
         rightItems.push({
             children: [
               <Image avatar spaced="right" src={user.picture} key="image"/>,
