@@ -1,42 +1,92 @@
-import React from 'react'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import React, { useState } from "react";
+import { Button, Form, Header, Image, Modal, Segment } from "semantic-ui-react";
+import BuyForm from "./BuyForm"
+import "./BuyProduct.css";
+import { confirmOrder } from "../../services/api";
+import { useAuth0 } from "@auth0/auth0-react";
 
-function BuyProduct() {
-  const [open, setOpen] = React.useState(false)
+function BuyProduct({ productInfo, item }) {
+  const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
+    useAuth0();
+
+  const { description, image, name, price } = productInfo;
+
+  const [open, setOpen] = useState(false);
+  const inintFormData = { address: "", phone: "", paymentMethod: "cash" };
+  const [options, setOptions] = useState(inintFormData);
+
+  async function confirmAction() {
+    try {
+      const token = await getAccessTokenSilently();
+      console.log("options",options);
+      debugger;
+      const userObj = {
+        id: user.sub,
+        email: user.email,
+        name: user.name,
+        picture: user.picture,
+      };
+      const orderStatus = await confirmOrder(userObj, item, token, options);
+      console.log(orderStatus);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  function changeOptions(prop) {
+    console.log("prop",prop);
+    setOptions({ ...options, ...prop });
+  }
 
   return (
     <Modal
+      className="custom-modal"
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>BUY</Button>}
+      trigger={
+        <Button color="green" inverted floated="right">
+          BUY
+        </Button>
+      }
     >
-      <Modal.Header>Select a Photo</Modal.Header>
       <Modal.Content image>
-        <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
+        <Image
+          size="medium"
+          src={
+            image ||
+            "https://react.semantic-ui.com/images/avatar/large/rachel.png"
+          }
+          wrapped
+        />
         <Modal.Description>
-          <Header>Default Profile Image</Header>
-          <p>
-            We've found the following gravatar image associated with your e-mail
-            address.
-          </p>
-          <p>Is it okay to use this photo?</p>
+          <Header>{name}</Header>
+          <p>{description}</p>
+          <p>{price + "$"}</p>
         </Modal.Description>
+
+        <BuyForm userName={user.name} changeOptions={changeOptions} />
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => setOpen(false)}>
-          Nope
-        </Button>
-        <Button
-          content="Yep, that's me"
-          labelPosition='right'
-          icon='checkmark'
-          onClick={() => setOpen(false)}
-          positive
-        />
+        <Segment>
+          <Segment.Inline>
+            <Button color="black" onClick={() => setOpen(false)}>
+              Nope
+            </Button>
+            <Button
+              content="Confirm"
+              labelPosition="right"
+              icon="checkmark"
+              onClick={() => {
+                setOpen(false);
+                confirmAction();
+              }}
+              positive
+            />
+          </Segment.Inline>
+        </Segment>
       </Modal.Actions>
     </Modal>
-  )
+  );
 }
 
 export default BuyProduct;

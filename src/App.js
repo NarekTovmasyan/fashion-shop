@@ -5,7 +5,7 @@ import Home from "./components/home/Home";
 import Products from "./components/products/Products";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import LoginPage from "./components/login/LoginPage";
-import Dashboard from "./components/dashboard/Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard"
 
 
 function App(slides) {
