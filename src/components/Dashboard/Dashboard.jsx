@@ -3,11 +3,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { domainName } from "../../config";
 import { Table, Icon } from "semantic-ui-react";
 import { useEffect, useState } from "react";
+import AddProduct from "../products/AddProduct";
 
 function Dashboard() {
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
     useAuth0();
-  const [adminData, setAdminData] = useState([]);
+  const [orderList, setOrderList] = useState([]);
   //   user && console.log(user[`${domainName}roles`]);
 
   async function orderShow() {
@@ -18,7 +19,7 @@ function Dashboard() {
       console.log(data);
 
       if (data && Array.isArray(data)) {
-        if (data.length !== 0) setAdminData(data);
+        if (data.length !== 0) setOrderList(data);
       } else if (data && data.status === 401) {
         const authorised = await authoriseUser(user, token);
       } else {
@@ -31,17 +32,20 @@ function Dashboard() {
   useEffect(() => {
       console.log("use effect call");
       if(user) orderShow();
+      console.log("user=",user)
+      if (user) {
+       console.log("userDomain",user[`${domainName}roles`])
+     }
    
   }, [user]);
   return (
     <div className="dashboard ui container">
-      it's dashboard
-      {console.log(adminData)}
+      it's dashboard      
       {user &&
       user[`${domainName}roles`] &&
       user[`${domainName}roles`].includes("admin") ? (
         <>
-          <button>Add New Product</button>
+          <AddProduct />
           <Table celled>
             <Table.Header>
               <Table.Row>
@@ -76,7 +80,7 @@ function Dashboard() {
           </Table>
         </>
       ) : (
-        ""
+       ""
       )}
     </div>
   );

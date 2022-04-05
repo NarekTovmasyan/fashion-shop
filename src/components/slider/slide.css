@@ -42,7 +42,7 @@ img {
     width: 100%;
 }
 
-.ui.button{
+#slide .ui.button{
 	background: none;
 	z-index: 100;
 	position: absolute;
