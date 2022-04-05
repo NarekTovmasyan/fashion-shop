@@ -25,6 +25,36 @@ export async function getOrders(user_id, token) {
     console.log("sxal", error);
   }
 }
+export async function getAllOrders(user_id, token) {
+  try {
+      const response = await fetch(`${apiURL}order/get-all`, {
+          method: "GET",
+          headers: {
+              Authorization: `Bearer ${token}`,
+              user_id: user_id
+          }
+      })
+      return await response.json();
+  } catch (error) {
+      console.log("wrong", error);
+  }
+}
+
+export async function getOrderByStatus(user_id, token, status) {
+  try {
+      const response = await fetch(`${apiURL}order/user-order`, {
+          method: "GET",
+          headers: {
+              Authorization: `Bearer ${token}`,
+              user_id: user_id,
+              status: status
+          }
+      })
+      return await response.json();
+  } catch (error) {
+      console.log("wrong", error);
+  }
+}
 
 export async function authoriseUser(user, token) {
   const { sub: id, name, email, picture } = user;

@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.ui.grid {
+.productItems.ui.grid {
   margin: 2vh;
   gap: 20px;
 }
