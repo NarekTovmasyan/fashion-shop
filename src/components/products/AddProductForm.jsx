@@ -7,7 +7,7 @@ function AddProductForm({changeOptions}) {
       }
   return (
     <div>
-        <h4>petak</h4>
+        <h4>Add New Product</h4>
       <Form>
         <Form.Field
           name="productName"

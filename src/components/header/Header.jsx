@@ -6,8 +6,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "./Header.css";
 import { nanoid } from "nanoid";
 
-
-
  const AppMedia = createMedia({
     breakpoints: {
     mobile: 320,
@@ -48,6 +46,7 @@ const NavBarMobile = (props) => {
       >
         <Menu fixed="top" inverted>
           <Menu.Item key={nanoid()}>
+                {/* <Image as={Link} to="/" size="mini" src={logo} className="logoIcon" /> */}
             <Image size="mini" src="https://react.semantic-ui.com/logo.png"  />
           </Menu.Item>
           <Menu.Item onClick={onToggle} key={nanoid()}>
@@ -76,6 +75,7 @@ const NavBarDesktop = (props) => {
   return (
     <Menu fixed="top" inverted>
       <Menu.Item key={nanoid()}>
+      {/* <Image as={Link} to="/" size="mini" src={logo} className="logoIcon"/> */}
         <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
       </Menu.Item>
 
@@ -142,12 +142,12 @@ const leftItems = [
   // { as: Link, to: "/review", content: "Review", key: "review" },
 ];
 
-const rightItems = [];
+const rightItems = [
+  { as: Link, to: "/login", content: "Login", key: "login" },
+];
 
 function Header() {
   const {user, isAuthenticated,logout} = useAuth0();
-  console.log(user);
-  console.log(isAuthenticated);
 
   rightItems.length = 0;
   if(isAuthenticated){

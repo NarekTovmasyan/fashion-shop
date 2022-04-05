@@ -8,12 +8,13 @@ function CardItem({ description, image, name, price,item }) {
   const {isAuthenticated,user} =useAuth0();
   return (
     <Card centered>
+      {/* <Image src={img.length > 0 && img[0].imagePath.includes("localhost:8080") ? img[0].imagePath : logo } height="200px" /> */}
       <Image src={image} wrapped ui={false} />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
-        <Card.Meta>
+        {/* <Card.Meta>
           <span className="date">Joined in 2015</span>
-        </Card.Meta>
+        </Card.Meta> */}
         <Card.Description>{description}</Card.Description>
       </Card.Content>
       

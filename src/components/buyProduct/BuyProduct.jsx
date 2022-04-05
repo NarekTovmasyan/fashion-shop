@@ -17,9 +17,7 @@ function BuyProduct({ productInfo, item }) {
 
   async function confirmAction() {
     try {
-      const token = await getAccessTokenSilently();
-      console.log("options",options);
-      
+      const token = await getAccessTokenSilently();      
       const userObj = {
         id: user.sub,
         email: user.email,
@@ -70,7 +68,7 @@ function BuyProduct({ productInfo, item }) {
         <Segment>
           <Segment.Inline>
             <Button color="black" onClick={() => setOpen(false)}>
-              Nope
+              Close
             </Button>
             <Button
               content="Confirm"

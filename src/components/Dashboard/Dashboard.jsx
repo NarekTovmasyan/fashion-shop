@@ -18,7 +18,6 @@ function Dashboard() {
   async function orderShow() {
     try {
       const token = await getAccessTokenSilently();
-      console.log(token);
       let data = null;
 
       if (user && user[`${domainName}roles`] === ADMIN) {

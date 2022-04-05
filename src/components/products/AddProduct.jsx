@@ -37,8 +37,8 @@ function AddProduct() {
         },
       };
 
-        const orderStatus = await confirmAddProduct(productObj, token);
-        console.log(orderStatus);
+      const orderStatus = await confirmAddProduct(productObj, token);
+      console.log(orderStatus);
     } catch (error) {
       console.log(error);
     }
