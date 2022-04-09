@@ -1,20 +1,22 @@
-.ui.cards > .card {
-  display: flex;
-  background-color: white;
-  justify-content: center;
+.ui.cards>.card{
+    display: flex;
+    background-color:white;
+    justify-content: center;
+
 }
 .ui.card {
-  margin: 0;
-  align-items: center;
+    margin: 0;
+    align-items: center;
+
 }
 
 .productItems.ui.grid {
-  margin: 2vh;
-  gap: 20px;
-}
+    margin: 2vh;
+    gap: 20px;
+  }
 
-.ui.card > .image,
-.ui.cards > .card > .image {
-  width: 100px;
-  background: none;
+.ui.card>.image,
+ .ui.cards>.card>.image {
+    width: 100px;
+    background:none;
 }

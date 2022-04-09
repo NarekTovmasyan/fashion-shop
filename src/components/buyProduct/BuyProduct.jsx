@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Header, Image, Modal, Segment } from "semantic-ui-react";
-import BuyForm from "./BuyForm"
+import BuyForm from "./BuyForm";
 import "./BuyProduct.css";
 import { confirmOrder } from "../../services/api";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -10,14 +10,13 @@ function BuyProduct({ productInfo, item }) {
     useAuth0();
 
   const { description, image, name, price } = productInfo;
-
   const [open, setOpen] = useState(false);
   const inintFormData = { address: "", phone: "", paymentMethod: "cash" };
   const [options, setOptions] = useState(inintFormData);
 
   async function confirmAction() {
     try {
-      const token = await getAccessTokenSilently();      
+      const token = await getAccessTokenSilently();
       const userObj = {
         id: user.sub,
         email: user.email,
@@ -31,7 +30,7 @@ function BuyProduct({ productInfo, item }) {
     }
   }
   function changeOptions(prop) {
-    console.log("prop",prop);
+    console.log("prop", prop);
     setOptions({ ...options, ...prop });
   }
 
@@ -68,7 +67,7 @@ function BuyProduct({ productInfo, item }) {
         <Segment>
           <Segment.Inline>
             <Button color="black" onClick={() => setOpen(false)}>
-              Close
+              Nope
             </Button>
             <Button
               content="Confirm"

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getData,getProducts } from "../../services/api";
+import { getData, getProducts } from "../../services/api";
 import CardItem from "./CardItem";
 import "./cards.css";
 
@@ -17,7 +17,7 @@ const Cards = () => {
       {result.map((item) => {
         return (
           <CardItem
-          item={item}
+            item={item}
             key={item.id}
             description={item?.description.comment || ""}
             image={item.image}
