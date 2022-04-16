@@ -17,8 +17,18 @@ const options = [
 ];
 
 const FormFieldError = ({ userName, changeOptions }) => {
+  // const [inpChange,setInpChange] = useState("");
+  // useEffect(()=>{
+      // const id = setTimeout(()=>{
+        // changeOptions(inpChange);
+      // },1700);
+      // return ()=>clearTimeout(id)
+  // },[inpChange])
   function handleChange(event) {
+    // const id = setTimeout(() => {
     changeOptions({ [event.target.name]: event.target.value });
+    // },1200);
+    // return ()=>clearTimeout(id);
   }
   return (
     <Form>
@@ -37,7 +47,13 @@ const FormFieldError = ({ userName, changeOptions }) => {
         label="Address"
         placeholder="Address"
         name="address"
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => {
+          handleChange(e)
+          // const idSetAdress =setTimeout(()=>{
+            // handleChange(e);
+          // },1200) ;
+          // return ()=>clearTimeout(idSetAdress)
+        }}
       />
       <Form.Field
         id="form-input-control-phone-number"
@@ -45,7 +61,13 @@ const FormFieldError = ({ userName, changeOptions }) => {
         label="Phone number"
         placeholder="Phone number"
         name="phone"
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => {
+          handleChange(e)
+          // const idSetPhone =setTimeout(()=>{
+            // handleChange(e);
+          // },1200) ;
+          // return ()=>clearTimeout(idSetPhone)
+        }}
       />
 
       <Form.Field>
@@ -54,7 +76,9 @@ const FormFieldError = ({ userName, changeOptions }) => {
           name="paymentMethod"
           value="cash"
           checked={true}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => {
+            handleChange(e)
+          }}
         />
       </Form.Field>
       <Form.Field>

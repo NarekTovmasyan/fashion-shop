@@ -3,8 +3,9 @@ import {
   getOrderByStatus,
   authoriseUser,
   getProducts,
+  getAllOrders,
   changeOrderStatus,
-  imgUpdate
+  imgUpdate,
 } from "../../services/api";
 import { useAuth0 } from "@auth0/auth0-react";
 import { domainName } from "../../config";
@@ -14,41 +15,40 @@ import AddProduct from "../products/AddProduct";
 import Tabs from "../tabs/Tabs";
 import { ADMIN, UNPAID } from "../../services/constants";
 import DataTable from "../dataTable/DataTable";
+import DataTableForUsser from "../dataTable/DataTableForUsser"; 
 
 function Dashboard() {
-
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
     useAuth0();
   const [orderList, setOrderList] = useState([]);
-
   const [adminData, setAdminData] = useState({});
   const [responseInfo, setResponseInfo] = useState("");
 
-console.log("user",user);
   async function orderShow() {
     try {
       const token = await getAccessTokenSilently();
       let data = null;
-      // let productData=null;
-
+      // console.log("user",user);
       if (user && user[`${domainName}roles`].includes(ADMIN)) {
         const dataResult = await Promise.all([
           getProducts(),
-          getOrderByStatus(user.sub, token, UNPAID),
+          getAllOrders(user.sub, token, UNPAID),
         ]);
-          console.log("dataResult", dataResult);
-        if (dataResult && dataResult[1] && dataResult[1].status === 401)  {
+        console.log("dataResult", dataResult);
+        if (dataResult && dataResult[1] && dataResult[1].status === 401) {
           const authorised = await authoriseUser(user, token);
         } else {
-         
-        setAdminData((adminData) => ({
-          ...adminData,
-          allProducts: dataResult[0],
-          pendingProducts: dataResult[1],
-        }));
-      }
+          setAdminData((adminData) => ({
+            ...adminData,
+            allProducts: dataResult[0],
+            pendingProducts: dataResult[1],
+          }));
+          console.log("adminData", adminData);
+        }
       } else {
         data = await getOrders(user.sub, token);
+        console.log("user as a user ",user);
+        console.log("data",data);
         if (data && Array.isArray(data)) {
           if (data.length !== 0) setOrderList(data);
         } else if (data && data.status === 401) {
@@ -76,33 +76,33 @@ console.log("user",user);
         order_id,
         status
       );
+      orderShow();//I put this function call
       console.log("changeResult", changeResult);
     } catch (error) {
       console.log("sxal es arel");
     }
   }
 
-    async function uploadImg(file, productId) {
-      try {
-        const token = await getAccessTokenSilently();
-        const responseImg = await imgUpdate(productId, file, token, user.sub);
-        console.log(responseImg);
+  async function uploadImg(file, productId) {
+    try {
+      const token = await getAccessTokenSilently();
+      const responseImg = await imgUpdate(productId, file, token, user.sub);
+      console.log(responseImg);
 
-        if (responseImg.httpStatus && responseImg.httpStatus==="OK") {
-          
-          setResponseInfo(responseImg.message);
-        }
-      } catch (error) {
-        console.log("something went wrong", error);
+      if (responseImg.httpStatus && responseImg.httpStatus === "OK") {
+        setResponseInfo(responseImg.message);
       }
-
-      console.log("file", file);
+    } catch (error) {
+      console.log("something went wrong", error);
     }
 
-    function  handleDismiss() {
-      setResponseInfo("")
-    }
+    console.log("file", file);
+  }
 
+  function handleDismiss() {
+    setResponseInfo("");
+  }
+  console.log("adminData", adminData);
   return (
     <div className="dashboard ui container">
       {responseInfo.length > 0 ? (
@@ -123,7 +123,7 @@ console.log("user",user);
           />
         </>
       ) : (
-        <DataTable list={orderList} />
+        <DataTableForUsser list={orderList} />
       )}
     </div>
   );

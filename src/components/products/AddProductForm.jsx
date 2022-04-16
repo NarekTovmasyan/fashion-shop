@@ -27,7 +27,7 @@ function AddProductForm({ changeOptions }) {
           name="productDescription"
           control={TextArea}
           label="Description"
-          placeholder="please enter 5-255 simbol for description"
+          placeholder="description"
           onChange={(e) => handleChange(e)}
         />
         <Form.Field
