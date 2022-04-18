@@ -1,61 +1,85 @@
+import "./dashboard.css";
+// import "./BuyProduct.css";
+import { domainName } from "../../config";
 import {
   getOrders,
-  getOrderByStatus,
   authoriseUser,
-  getProducts,
   getAllOrders,
+  getOrderByStatus,
+  getProducts,
   changeOrderStatus,
   imgUpdate,
-} from "../../services/api";
+} from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
-import { domainName } from "../../config";
-import { Table, Icon, Message } from "semantic-ui-react";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { Message } from "semantic-ui-react";
+import {
+  USER,
+  ADMIN,
+  PAID,
+  UNPAID,
+  PENDING,
+  SENT,
+  DONE,
+} from "../../Services/constants";
 import AddProduct from "../products/AddProduct";
-import Tabs from "../tabs/Tabs";
-import { ADMIN, UNPAID } from "../../services/constants";
-import DataTable from "../dataTable/DataTable";
-import DataTableForUsser from "../dataTable/DataTableForUsser"; 
+import Tabs from "../Tabs/Tabs";
+import UserOrdersTabs from "../Tabs/UserOrdersTabs";
+
 
 function Dashboard() {
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
     useAuth0();
   const [orderList, setOrderList] = useState([]);
+
   const [adminData, setAdminData] = useState({});
+
   const [responseInfo, setResponseInfo] = useState("");
 
+  const { allProducts, pendingOrders, unpaidOrders,  sentOrders, paidOrders, allDoneOrders , allOrders  } = adminData;
+
+  
   async function orderShow() {
     try {
       const token = await getAccessTokenSilently();
       let data = null;
-      // console.log("user",user);
+
       if (user && user[`${domainName}roles`].includes(ADMIN)) {
         const dataResult = await Promise.all([
           getProducts(),
-          getAllOrders(user.sub, token, UNPAID),
+          getOrderByStatus(user.sub, token, PENDING),
+          getOrderByStatus(user.sub, token, UNPAID),
+          getOrderByStatus(user.sub, token, SENT),
+          getOrderByStatus(user.sub, token, PAID),
+          getOrderByStatus(user.sub, token, DONE),
+          getAllOrders(user.sub, token),
         ]);
-        console.log("dataResult", dataResult);
         if (dataResult && dataResult[1] && dataResult[1].status === 401) {
           const authorised = await authoriseUser(user, token);
         } else {
           setAdminData((adminData) => ({
             ...adminData,
             allProducts: dataResult[0],
-            pendingProducts: dataResult[1],
+            pendingOrders: dataResult[1],
+            unpaidOrders: dataResult[2],
+            sentOrders:dataResult[3],
+            paidOrders:dataResult[4],
+            allDoneOrders: dataResult[5],
+            allOrders: dataResult[6],
           }));
-          console.log("adminData", adminData);
+          if (adminData) console.log("adminData", adminData);
         }
       } else {
         data = await getOrders(user.sub, token);
-        console.log("user as a user ",user);
-        console.log("data",data);
+
         if (data && Array.isArray(data)) {
           if (data.length !== 0) setOrderList(data);
         } else if (data && data.status === 401) {
           const authorised = await authoriseUser(user, token);
         } else {
-          console.log("paka");
+          console.log("hajox");
         }
+        
       }
     } catch (error) {
       console.log("user not authorised");
@@ -65,7 +89,6 @@ function Dashboard() {
   useEffect(() => {
     if (user || responseInfo.length > 0) orderShow();
   }, [user, responseInfo]);
-  const { pendingProducts, allProducts } = adminData;
 
   async function changeStatus(status, order_id) {
     try {
@@ -76,8 +99,8 @@ function Dashboard() {
         order_id,
         status
       );
-      orderShow();//I put this function call
       console.log("changeResult", changeResult);
+      orderShow();
     } catch (error) {
       console.log("sxal es arel");
     }
@@ -93,7 +116,7 @@ function Dashboard() {
         setResponseInfo(responseImg.message);
       }
     } catch (error) {
-      console.log("something went wrong", error);
+      setResponseInfo("something went wrong");
     }
 
     console.log("file", file);
@@ -102,14 +125,22 @@ function Dashboard() {
   function handleDismiss() {
     setResponseInfo("");
   }
-  console.log("adminData", adminData);
+
+  console.log(adminData);
+  console.log("unpaidOrders ", unpaidOrders);
+  console.log("allDoneOrders ", allDoneOrders);
+  console.log("allOrder ", allOrders);
+  console.log("orderList", orderList);
   return (
-    <div className="dashboard ui container">
-      {responseInfo.length > 0 ? (
+      <div className="dashboard ui container">
+      {responseInfo.length > 0 && responseInfo === "something went wrong" ? (
+        <Message negative onDismiss={handleDismiss} content={responseInfo} />
+      ) : responseInfo.length > 0 && responseInfo !== "something went wrong" ? (
         <Message success onDismiss={handleDismiss} content={responseInfo} />
       ) : (
         ""
       )}
+
       {user &&
       user[`${domainName}roles`] &&
       user[`${domainName}roles`].includes(ADMIN) ? (
@@ -117,15 +148,23 @@ function Dashboard() {
           <AddProduct setResponseInfo={setResponseInfo} />
           <Tabs
             uploadImg={uploadImg}
-            pendingProducts={pendingProducts}
+            pendingOrders={pendingOrders}
+            unpaidOrders={unpaidOrders}
+            sentOrders={sentOrders}
+            paidOrders={paidOrders}
+            allOrders={allOrders}
+            allDoneOrders={allDoneOrders}
             allProducts={allProducts}
             changeStatus={changeStatus}
           />
         </>
       ) : (
-        <DataTableForUsser list={orderList} />
+        <>
+          <UserOrdersTabs orderList={orderList} />
+        </>
       )}
     </div>
+    
   );
 }
 export default Dashboard;

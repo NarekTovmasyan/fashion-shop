@@ -1,62 +1,41 @@
 import { useEffect, useState } from "react";
-import { Button, Pagination } from "semantic-ui-react";
-import { getData, getProducts } from "../../services/api";
+import { getData, getProducts } from "../../Services/api";
 import CardItem from "./CardItem";
-import "./cards.css";
+import Paginations from "../pagination/Pagination";
+import "./card.css"
 
-const Cards = ({pageDevider}) => {
+const Cards = () => {
   const [result, setResult] = useState([]);
   const [productsByPage, setProductsByPage] = useState([]);
-  const [start, setStart] = useState(0);
-  
-  
 
-  useEffect(() => {
-    (async function createPageinashion() {
-      let data = await getProducts();
-      setResult(data);
-    })();
-  }, []);
-
-  useEffect(() => {
-    setProductsByPage(result.slice(start, start + pageDevider));
-  }, [start, result]);
-
-  function goToPage(e, data) {
-    console.log(data.activePage);
-    setStart(data.activePage * pageDevider - pageDevider);
+  function getProductsByPage(productsByPage){
+    setProductsByPage(productsByPage)
   }
-  
-  console.log("result", result);
-  //console.log("result", result[0].img[0].imagePath);
+  useEffect(() => {
+    getProducts().then((param) => {
+      setResult(param);
+    });
+  }, [productsByPage]);
+
   return (
-    <div className="ui stackable three column grid productItems">
-      {productsByPage &&
-        productsByPage.length > 0 &&
-        productsByPage.map((item) => {
-          return (
-            <CardItem
-              item={item}
-              key={item.id}
-              description={item?.description.comment || ""}
-              //image={item.img.length>0 && item.img[0].imagePath ? item.img[0].imagePath:"" }
-              image={item.img[0]}
-              name={item.name}
-              price={item.price}
-            />
-          );
-        })}
-      
-      <div className="pagination-container">
-        {/* semantic pagination */}
-        <Pagination
-          defaultActivePage={1}
-          secondary
-          onPageChange={goToPage}
-          totalPages={Math.ceil(result.length / pageDevider)}
-        />
-      </div>
+    <>
+    <div className="ui stackable three column grid productItems"> 
+      {productsByPage && productsByPage.length > 0 && productsByPage.map((item) => {
+        return (
+          <CardItem
+            item={item}
+            key={item.id}
+            description={item?.description.comment || ""}
+            img={item.img}
+            name={item.name}
+            price={item.price}
+            currency={item.currency}
+          />
+        );
+      })}
     </div>
+      <Paginations result={result} getProductsByPage={getProductsByPage}/>
+      </>
   );
 };
 

@@ -1,11 +1,12 @@
-import Footer from "./components/footer/Footer.jsx";
+import Footer from "./Components/footer/Footer.jsx";
 import "./App.css";
-import Header from "./components/header/Header.jsx";
-import Home from "./components/home/Home.jsx";
-import Dashboard from "./components/dashboard/Dashboard.jsx";
-import Products from "./components/products/Products.jsx";
+import Header from "./Components/header/Header";
+import Home from "./Components/home/Home.jsx";
+import Dashboard from "./Components/Dashboard/Dashboard.jsx";
+import Products from "./Components/products/products.jsx";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import LoginPage from "./components/login/LoginPage.jsx";
+import LoginPage from "./Components/Login/Loginbutton.jsx";
+import { Parent } from "./Components/UseContext.jsx";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </BrowserRouter>
   );

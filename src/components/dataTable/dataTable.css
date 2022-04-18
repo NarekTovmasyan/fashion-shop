@@ -1,80 +1,46 @@
-.ui.image.product-icon{
-    width: auto;
+.ui.avatar.image.product-icon{
+    width: 50px;
+    height: auto;
+    border-radius: 20%;
+}
+/* .ui.avatar.image{
+    border-radius: 0%; 
+} */
+.grid-table{
     height: 90px;
-     
-    }
-
-.grid-table {
-    position: relative;
 }
-
-.grid-table>.row{
-    height: 120px;
+.upload{
+   border: none;
+   background: none;
+   color: brown;
+   cursor: pointer;
 }
-#name-prudct{
-    font-size: 18px;
-    font-weight: 500;
-    
+.icon.iconUpload{
+   font-size: 20px;
 }
-
-#price-id{
-    font-size: 16px;
-    font-weight: 500;
-}
-
-#status-id{
-    font-weight: 500;
-}
-
-#address-id{
-    font-size: 12px;
-    font-weight: 300;
-}
-#address{
- font-size: 17px;
- font-weight: 500;
-}
-
-.phone-pending{
-    font-size: 10px;
-}
-
-.pending-item{
-    border-bottom: 1px solid #999999;
-}
-
-.item{
-    justify-content: space-between;
-}
-
-.ui.button.btn-upload{
-    background: none;
-    
-}
-.green.upload.icon.btn-icon{
-    font-size: 14px;
-}
-
 input[type=file] {
     display: none;
-    
+}
+.productId{
+    font-family: "Libre Baskerville", serif;
 }
 
-.img-icon{
-    cursor: pointer;
+.ui.button.buyBtn{
+    /* left: 40%; */
+    margin-bottom: 30px;
 }
-
-.ui.grid.grid-table{
-    margin-bottom: 20px;
+.price{
+    font-size: 14px;
+    font-weight: 900;
+    font-style: italic;
+    color: brown;
 }
-
-.currency{
-    font-size: 10px;
-    /* opacity: 0.5; */
+.orderDate{
+    font-size: 8px;
 }
-
-.nine.wide.column.image-upload-form{
-    width: 100%;
-    display: flex;
-    align-items: center;
+.tooltip{
+  /* border-radius: 100px; */
+  opacity: 0.7;
+  /* padding: '2em'; */
+ /* font-size: '0.5em'; */
 }

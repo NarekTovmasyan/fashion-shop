@@ -1,15 +1,14 @@
 import Cards from "../card/Cards";
-import Slide from "../slider/Slides.jsx";
-import slidesData from "../../services/slideData.js";
-import "../home/home.css";
+import Slide from "../Slide/Slide"
+import slidesData from "../../Services/slideData";
+import "../home/home.css"
 
-function Home() {
-  let countPageProduct = 4;
-  return (
-    <div className="home ui container">
-      <Slide slides={slidesData()} />
-      <Cards pageDevider={countPageProduct}/>
-    </div>
-  );
+function Home(){
+    return (
+       <div className="home main ui container">
+            <Slide slides={slidesData()}/>
+            <Cards />
+       </div>
+    )
 }
 export default Home;
