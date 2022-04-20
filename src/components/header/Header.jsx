@@ -5,7 +5,8 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { Icon, Image, Menu, Sidebar, Dropdown } from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
-import logo from "../../logo.png";
+import logo from "../../logo3.png";
+// import logo from "../../Group 165.png";
 import { nanoid } from 'nanoid';
 
 const AppMedia = createMedia({
@@ -23,6 +24,9 @@ const { Media, MediaContextProvider } = AppMedia;
 const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems, visible }) => {
   return (
     <Sidebar.Pushable>
+      <Sidebar.Pusher >
+
+      </Sidebar.Pusher>
       <Sidebar
       key={nanoid()}
         as={Menu}

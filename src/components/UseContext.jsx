@@ -40,7 +40,7 @@ function SubChild() {
   const newContext = useContext(dataContext);
 
   console.log("getContext.lenghth===", newContext ? newContext.length : 0);
-  
+
   const [allData, setAllData] = useState([{ name: "test" }]);
 
   useEffect(() => {

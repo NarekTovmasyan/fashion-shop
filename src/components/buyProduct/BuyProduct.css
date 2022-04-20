@@ -4,14 +4,13 @@
 .ui.button.buyBtn{
     position: relative;
     border: none;
-    background: #fbe8ea;
+    background: #0ffbeb;
     border-radius: 15px;
-    color: chocolate;
-    /* margin-left: 25px;  */
+    color: blue;
 }
 .ui.button.buyBtn:hover{
-    background: #d3c0ba; 
-    color: #fbe8ea;
+    background: #95eff5; 
+    color: black;
     cursor: pointer;
 }
 .ui.button.modalBuyBtn{
@@ -24,7 +23,7 @@
 }
 .ui.header{
     font-weight: 100;
-    color: rgb(138 116 118)
+    color: rgb(7, 6, 6)
 }
 .ui.header+p{
     color: rgb(193, 193, 193);

@@ -2,10 +2,10 @@ import { Tab } from "semantic-ui-react";
 import { render } from '@testing-library/react';
 import UserOrdersTable from "../dataTable/UserOrdersTable";
 import { useState, useEffect } from "react";
-
+import Paginations from "../pagination/Pagination";
 
 function UserOrderTabs({orderList}){
-
+const [result, setResult] = useState([]);
 const [userData, setUserData] = useState({});
 const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = userData;
 
@@ -34,49 +34,75 @@ const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = user
             paidOrders: userPaidOrders(orderList),
             doneOrders: userDoneOrders(orderList)
         }));
-    }, [orderList])
+    }, [result])
 
     console.log("userData " ,userData);
+
+    const [productsByPage, setProductsByPage] = useState([]);
+  
+    function getProductsByPage(productsByPage){
+        console.log("funkciai meji log" , productsByPage);
+      setProductsByPage(productsByPage)
+    }
+
+    useEffect(() =>{
+      if (orderList && orderList.length > 0) setResult(orderList)
+    }, [ orderList])
 
     const panes = [
         {
             menuItem: "Pending",
             render: () => (
+              <>
                 <Tab.Pane>
-                    <UserOrdersTable list={pendingsOrders} />
+                <UserOrdersTable list={productsByPage}/>
+                <Paginations result={pendingsOrders} getProductsByPage={getProductsByPage}/>
                 </Tab.Pane>
+              </>
             )
         },
         {
             menuItem: "Unpaid",
             render: () => (
+                <>
                 <Tab.Pane>
-                    <UserOrdersTable list={unpaidOrders}/>
+                    <UserOrdersTable list={productsByPage}/>
                 </Tab.Pane>
+                <Paginations result={unpaidOrders} getProductsByPage={getProductsByPage}/>
+                </>
             )
         },
         {
             menuItem: "Sent",
             render: () => (
+             <>
                 <Tab.Pane>
-                    <UserOrdersTable list={sentOrders}/>
+                    <UserOrdersTable list={productsByPage}/>
                 </Tab.Pane>
+                 <Paginations result={sentOrders} getProductsByPage={getProductsByPage}/>
+             </>
             )
         },
         {
             menuItem: "Paid",
             render: () => (
+                <>                
                 <Tab.Pane>
-                    <UserOrdersTable list={paidOrders} />
+                    <UserOrdersTable list={productsByPage} />
                 </Tab.Pane>
+                <Paginations result={paidOrders} getProductsByPage={getProductsByPage}/>
+                </>
             )
         },
         {
             menuItem: "Done",
             render: () => (
+                <>                
                 <Tab.Pane>
-                    <UserOrdersTable list={doneOrders}/>
+                    <UserOrdersTable list={productsByPage} />
                 </Tab.Pane>
+                <Paginations result={doneOrders} getProductsByPage={getProductsByPage}/>
+                </>
             )
         },
     ]

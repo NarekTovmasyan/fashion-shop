@@ -7,19 +7,28 @@ import Products from "./Components/products/products.jsx";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import LoginPage from "./Components/Login/Loginbutton.jsx";
 import { Parent } from "./Components/UseContext.jsx";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "./Components/loading/Loading";
 
 function App() {
+  const { isLoading } = useAuth0();
   return (
     <BrowserRouter>
       <div className="App">
-        <Header className="ui fixed inverted main menu" />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/products" element={<Products />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-        </Routes>
-        {/* <Footer /> */}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <Header className="ui fixed inverted main menu" />
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/products" element={<Products />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/login" element={<LoginPage />}></Route>
+            </Routes>
+            <Footer />
+          </>
+        )}
       </div>
     </BrowserRouter>
   );
