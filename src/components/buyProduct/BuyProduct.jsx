@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import { Button, Form, Header, Image, Modal, Segment } from "semantic-ui-react";
 import BuyForm from "./BuyForm";
 import "./BuyProduct.css";
-import logo from "../../logoNavBar.jpg";
+import logo from "../../img/speakToy.jpg";
 import { confirmOrder } from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getOrders } from "../../Services/api"

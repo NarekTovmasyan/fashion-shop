@@ -5,7 +5,7 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { Icon, Image, Menu, Sidebar, Dropdown } from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
-import logo from "../../logo3.png";
+import logo from "../../img/logo3.png";
 // import logo from "../../Group 165.png";
 import { nanoid } from 'nanoid';
 import { isUserExists, authoriseUser } from "../../Services/api";

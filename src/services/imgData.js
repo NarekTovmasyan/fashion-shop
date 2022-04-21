@@ -1,11 +1,11 @@
 
-import img1 from "../Components/Slide/jpg/img1.jpg"
-import img2 from "../Components/Slide/jpg/img2.jpg"
-import img3 from "../Components/Slide/jpg/img3.jpg"
-import img4 from "../Components/Slide/jpg/img4.jpg"
-import img5 from "../Components/Slide/jpg/img5.jpg"
+import img1 from "../Components/Slide/jpg/img1.gif"
+import img2 from "../Components/Slide/jpg/img2.gif"
+import img3 from "../Components/Slide/jpg/img3.gif"
+import img4 from "../Components/Slide/jpg/img4.webp"
+import img5 from "../Components/Slide/jpg/img5.gif"
 import img6 from "../Components/Slide/jpg/img6.gif"
-import img7 from "../Components/Slide/jpg/img7.gif"
+import img7 from "../Components/Slide/jpg/img7.webp"
 
 
 

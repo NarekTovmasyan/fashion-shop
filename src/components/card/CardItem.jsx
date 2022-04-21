@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Card, Icon, Image } from "semantic-ui-react";
 import BuyProduct from "../buyProduct/BuyProduct";
 import { Link } from "react-router-dom";
-import logo from "../../logoNavBar.jpg";
+import logo from "../../img/speakToy.jpg";
 
 function CardItem({ description, img, name, price, item, currency, stock, setResponseInfo }) {
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();

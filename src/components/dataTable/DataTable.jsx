@@ -1,5 +1,5 @@
 import "./dataTable.css";
-import logo from "../../logoNavBar.jpg";
+import logo from "../../img/speakToy.jpg";
 import { List, Grid, Segment, Image, Icon,Input } from "semantic-ui-react";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
