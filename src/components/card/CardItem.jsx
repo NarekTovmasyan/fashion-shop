@@ -6,10 +6,11 @@ import BuyProduct from "../buyProduct/BuyProduct";
 import { Link } from "react-router-dom";
 import logo from "../../logoNavBar.jpg";
 
-function CardItem({ description, img, name, price, item, currency }) {
-  const { isAuthenticated, user } = useAuth0();
+function CardItem({ description, img, name, price, item, currency, stock, setResponseInfo }) {
+  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
 
   return (
+    <>
     <Card centered>
       <Image className="cardImg"
         src={img.length > 0 && img[0].imagePath ? img[0].imagePath : logo}
@@ -20,21 +21,30 @@ function CardItem({ description, img, name, price, item, currency }) {
           {price} {currency}
         </Card.Content>
         <Card.Description>{description}</Card.Description>
+        <Card.Content>
+        {`In Stock ${stock}`}
+        </Card.Content>
       </Card.Content>
 
       <Card.Content>
-        {isAuthenticated ? (
+        {isAuthenticated ?(        
           <BuyProduct
+            stock={stock} 
             item={item}
             productInfo={{ description, img, name, price, currency }}
+            setResponseInfo={setResponseInfo}
           />
         ) : (
-          <Button as={Link} to="/login" className="buyBtn">
+          <Button onClick={loginWithRedirect} text="login" className="buyBtn">
+          {/* <Button as={Link} to="/login" className="buyBtn"> */}
             BUY
           </Button>
         )}
       </Card.Content>
     </Card>
+
+    </>
+
   );
 }
 

@@ -4,7 +4,7 @@ import CardItem from "./CardItem";
 import Paginations from "../pagination/Pagination";
 import "./card.css";
 
-const Cards = () => {
+const Cards = ({setResponseInfo}) => {
   const [result, setResult] = useState([]);
   const [productsByPage, setProductsByPage] = useState([]);
 
@@ -33,6 +33,8 @@ const Cards = () => {
                 name={item.name}
                 price={item.price}
                 currency={item.currency}
+                stock={item.stock.count}
+                setResponseInfo={setResponseInfo}
               />
             );
           })}

@@ -5,10 +5,11 @@
 .customHeader, .pusher{
     height: 60px;
     
-}
+}*/
 .logoIcon{
     cursor: pointer;
 }
+/*
  .pushable {
     overflow-x: visible;
     }
@@ -20,11 +21,11 @@
 } */
 .ui.fixed.menu.top,
 .ui.sidebar.menu {
-  background-color: #4e95db;
+    background-color: #043e48;
 }
 
 .customHeader {
-  height: 60px;
+  height: 76px;
 }
 
 #left-pusher.pusher {
@@ -41,7 +42,7 @@
 }
 
 #left-pusher .menu {
-  top: 60px;
+  top: 76px;
   width: 120px;
   height: auto !important;
   max-height: inherit;

@@ -24,9 +24,7 @@ const { Media, MediaContextProvider } = AppMedia;
 const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems, visible }) => {
   return (
     <Sidebar.Pushable>
-      <Sidebar.Pusher >
-
-      </Sidebar.Pusher>
+      <Sidebar.Pusher id = "left-pusher" dimmed={visible} onClick={onPusherClick}>
       <Sidebar
       key={nanoid()}
         as={Menu}
@@ -37,15 +35,14 @@ const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems
         vertical
         visible={visible}
       />
-      <Sidebar.Pusher
-        dimmed={visible}
-        onClick={onPusherClick}
-      >
+      </Sidebar.Pusher>
+
+      <Sidebar.Pusher >
         <Menu fixed="top" inverted>
-          <Menu.Item>
+          <Menu.Item key={nanoid()}>
             <Image as={Link} to="/" size="mini" src={logo} className="logoIcon" />
           </Menu.Item>
-          <Menu.Item onClick={onToggle}>
+          <Menu.Item onClick={onToggle} key={nanoid()}>
             <Icon name="sidebar" />
           </Menu.Item>
 
@@ -72,12 +69,12 @@ const NavBarDesktop = ({ leftItems, rightItems }) => {
   return (
     <>
       <Menu fixed="top" inverted>
-        <Menu.Item>
+        <Menu.Item key={nanoid()}>
           <Image as={Link} to="/" size="mini" src={logo} className="logoIcon"/>
         </Menu.Item>
 
-        {leftItems.map((item) => (
-          <Menu.Item {...item} />
+        {leftItems.map((item, index) => (
+          <Menu.Item {...item} key={index} />
         ))}
         <Menu.Menu position="right" key="rightItems">
           {rightItems.map((item, index) => {

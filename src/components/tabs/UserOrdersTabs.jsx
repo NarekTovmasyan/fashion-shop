@@ -28,11 +28,11 @@ const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = user
     useEffect(()=>{
         setUserData((userData) => ({
             ...userData,
-            pendingsOrders: userPendingsOrders(orderList),
-            unpaidOrders: userUnpaidOrders(orderList),
-            sentOrders: userSentOrders(orderList),
-            paidOrders: userPaidOrders(orderList),
-            doneOrders: userDoneOrders(orderList)
+            pendingsOrders: userPendingsOrders(result),
+            unpaidOrders: userUnpaidOrders(result),
+            sentOrders: userSentOrders(result),
+            paidOrders: userPaidOrders(result),
+            doneOrders: userDoneOrders(result)
         }));
     }, [result])
 

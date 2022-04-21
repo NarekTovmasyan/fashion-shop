@@ -1,5 +1,13 @@
 import React, { useEffect,useState } from "react";
-import { Form, Input,Radio } from 'semantic-ui-react'
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  Input,
+  TextArea,
+  Button,
+  Select,
+  Radio,
+} from "semantic-ui-react";
 
 const options = [
   { key: "m", text: "Male", value: "male" },
@@ -35,6 +43,7 @@ const FormFieldError = ({userName,changeOptions}) => {
         label='Phone number'
         placeholder='Phone number'
         name = "phone"
+        type="number"
         onChange = {(e)=>handleChange(e)}
       />
        

@@ -17,12 +17,11 @@ function PendingTable({ list, changeStatus, tabName }) {
       {list &&
         list.length > 0 &&
         list.map((item) => {
-          console.log("item", item);
           return (
-              <Popup
+              <Popup 
               inverted
               content={new Date(item.date).toString()}
-              key={item.name}
+              key={nanoid()}
               header={item.user.name}
               className="tooltip"
               trigger={

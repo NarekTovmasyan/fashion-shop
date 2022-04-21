@@ -164,7 +164,7 @@ export async function imgUpdate(productId, file, token, userId) {
   const formData = new FormData();
     formData.append("image", file);
 
-  for (var key of formData.entries()) {
+  for (let key of formData.entries()) {
     console.log(key[0] + ", " + key[1]);
   }
   try {
@@ -183,3 +183,20 @@ export async function imgUpdate(productId, file, token, userId) {
     console.log("sxalPost", error);
   }
 }
+
+// export async function deleteProducts(productId, token, userId) {
+//     try {
+//         const response = await fetch(`${apiURL}product/${productId}`,{
+//             method: "DELETE",
+//             headers: {
+//                 Authorization: `Bearer ${token}`,
+//                 "Content-Type": "application/json;charset=utf-8",
+//                 userId: userId
+//             },
+//         })
+//         const data = await response.json();
+//         return data;
+//     } catch (error) {
+//         console.log("wrong", error);
+//     }
+// }
