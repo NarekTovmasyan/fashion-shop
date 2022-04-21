@@ -1,5 +1,5 @@
 import "./header.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createMedia } from "@artsy/fresnel";
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../../logo3.png";
 // import logo from "../../Group 165.png";
 import { nanoid } from 'nanoid';
+import { isUserExists, authoriseUser } from "../../Services/api";
 
 const AppMedia = createMedia({
   breakpoints: {
@@ -133,7 +134,14 @@ const rightItems = [
 ];
 
 function Header() {
-  const { user, isAuthenticated, logout } = useAuth0();
+  const { user,
+    isAuthenticated,
+    logout,
+    error,
+    isLoading,
+    getAccessTokenSilently
+   } = useAuth0();
+
   rightItems.length = 0;
   if (isAuthenticated) {
     console.log(user);
@@ -164,6 +172,25 @@ function Header() {
       link: { as: Link, to: "/login", content: "Login", key: "login" },
     });
   }
+  useEffect(() => {
+    (async () => {
+      if (
+        isAuthenticated &&
+        localStorage.getItem("autoriseUser") !== user.nickname
+      ) {
+        let authorised;
+        const isExist = await isUserExists(user.sub);
+        console.log("isExist", isExist)
+        if (!isExist || (isExist.httpStatus === "OK" && isExist.info.exists === "false")) {
+          const token = await getAccessTokenSilently();
+          authorised = await authoriseUser(user, token);
+        }
+        if(authorised || (isExist.httpStatus === 'OK' && isExist.info.exists === "true")){
+          localStorage.setItem("autoriseUser", user.nickname);
+          }
+      }
+    })();
+  }, [isAuthenticated]);
   return (
     <MediaContextProvider>
       <NavBar leftItems={leftItems} rightItems={rightItems}></NavBar>
