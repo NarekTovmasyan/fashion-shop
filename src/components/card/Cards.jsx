@@ -17,7 +17,7 @@ const Cards = ({setResponseInfo}) => {
       setResult(data);
     })();
   }, []);
-
+console.log("itemi img ", productsByPage[productsByPage.length-1]);
   return (
     <>
       <div className="ui stackable three column grid productItems">

@@ -71,7 +71,7 @@ function AddProduct({setResponseInfo}) {
           <Segment>
             <Segment.Inline>
               <Button  onClick={() => setOpen(false)}>
-                Nope
+                Close
               </Button>
               <Button 
                 className="buyBtn"

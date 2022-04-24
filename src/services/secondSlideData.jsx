@@ -4,10 +4,10 @@ import images from "./imgData";
 function secondSlidesData(){
     const secondSLIDES = [
         {
-           image: images.img6,
+           image: images.img3,
          },
          {
-           image: images.img7,
+           image: images.img4,
          },
 
    ];

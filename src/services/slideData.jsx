@@ -5,9 +5,9 @@ function slidesData(){
         {
             image: images.img1,
           },
-          {
-            image: images.img2,
-          },
+          // {
+          //   image: images.img2,
+          // },
           {
             image: images.img3,
           },
@@ -15,9 +15,9 @@ function slidesData(){
           {
             image: images.img4,
           },
-          {
-            image: images.img5,
-          },
+          // {
+          //   image: images.img5,
+          // },
     ];
     return SLIDES;
 }

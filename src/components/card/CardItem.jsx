@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Card, Icon, Image } from "semantic-ui-react";
 import BuyProduct from "../buyProduct/BuyProduct";
 import { Link } from "react-router-dom";
-import logo from "../../img/speakToy.jpg";
+import logo from "../../img/default.jpg";
 
 function CardItem({ description, img, name, price, item, currency, stock, setResponseInfo }) {
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
@@ -13,7 +13,7 @@ function CardItem({ description, img, name, price, item, currency, stock, setRes
     <>
     <Card centered>
       <Image className="cardImg"
-        src={img.length > 0 && img[0].imagePath ? img[0].imagePath : logo}
+        src={img.length > 0 && img[img.length - 1].imagePath ? img[img.length - 1].imagePath : logo}
       />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
