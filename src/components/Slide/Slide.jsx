@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./slide.css";
 import {Button, Icon} from "semantic-ui-react";
 
@@ -28,6 +28,11 @@ function Slides({ slides }) {
     console.log("Restart ", index);
 
    }
+
+   useEffect(() => {
+    const slideId = setInterval(showNext, 3500);
+    return () => clearInterval(slideId);
+  }, [index]);
 
   return (
     <div>

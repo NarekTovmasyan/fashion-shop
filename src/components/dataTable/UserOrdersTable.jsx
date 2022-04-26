@@ -15,7 +15,7 @@ function UserOrdersTable({list}){
   // }
 
   useEffect(() =>{
-    if (list && list.length > 0) setResult(list)
+     setResult(list)
   }, [list])
 
   return(
