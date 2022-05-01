@@ -19,9 +19,6 @@ function BuyProduct({ productInfo, item, setResponseInfo , stock }) {
     const [options, setOptions] = useState(inintFormData);
     const [disable, setDisable] = useState(true);
 
-  console.log("currency ", currency);
-  console.log("productInfo ", productInfo);
-
     async function confirmAction() {
       try {
         const token = await getAccessTokenSilently();

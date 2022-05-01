@@ -49,7 +49,7 @@ const FormFieldError = ({userName,changeOptions}) => {
        
         <Form.Field>
           <Radio
-            label='Pay Buy Cash'
+            label='Pay By Cash'
             name='paymentMethod'
             value='cash'
             checked={true}
@@ -59,7 +59,7 @@ const FormFieldError = ({userName,changeOptions}) => {
         </Form.Field>
         <Form.Field>
           <Radio
-            label='Pay Buy Card'
+            label='Pay By Card'
             name='card'
             value='card'
             readOnly
